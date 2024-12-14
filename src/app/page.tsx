@@ -57,23 +57,23 @@ const Home: FC = () => {
       </section>
       <section ref={addToRefs} className="bg-black/30 px-8 m-auto w-full h-screen flex items-end justify-center pb-24 relative z-10">
         <div className="text-white text-center max-w-screen-xl">
-          <h1 className="text-4xl mb-4">Coleção Kira Returns
-          </h1>
-          <p>Entre muitos de nossos Editoriais, conheça o NOVO MUNDO, que foi Inspirado em um Lettring Futurista que se une a cada Modelo de Óculos ! Trazendo uma referência estilo Magazine, Capa de Manga, os maiores Sucessos da marca são Eternizados através desse Projeto Estético e Inovador !</p>
+          <h2 className="text-4xl mb-4 drop-shadow-sm">Coleção Kira Returns
+          </h2>
+          <p className='drop-shadow-sm'>Entre muitos de nossos Editoriais, conheça o NOVO MUNDO, que foi Inspirado em um Lettring Futurista que se une a cada Modelo de Óculos ! Trazendo uma referência estilo Magazine, Capa de Manga, os maiores Sucessos da marca são Eternizados através desse Projeto Estético e Inovador !</p>
         </div>
       </section>
 
       <section ref={addToRefs} className="bg-black/30 px-8 m-auto w-full h-screen flex items-end justify-center pb-24 relative z-10">
         <div className="text-white text-center max-w-screen-xl">
-          <h1 className="text-4xl mb-4">Lenda entre os maiores Rappers!</h1>
-          <p>Os Óculos mais LENDÁRIOS da Cena! As Famosas Lupas do KIRA que se tornaram uma Febre entre os Jovens através de sua Estética Diferenciada e Conceitos totalmente Inovadores! Aqui você também encontra a nossa Caixa Misteriosa, a Oferta mais Popular da marca em 2024!</p>
+          <h2 className="text-4xl mb-4 drop-shadow-sm">Lenda entre os maiores Rappers!</h2>
+          <p className='drop-shadow-sm'>Os Óculos mais LENDÁRIOS da Cena! As Famosas Lupas do KIRA que se tornaram uma Febre entre os Jovens através de sua Estética Diferenciada e Conceitos totalmente Inovadores! Aqui você também encontra a nossa Caixa Misteriosa, a Oferta mais Popular da marca em 2024!</p>
         </div>
       </section>
 
       <section ref={addToRefs} className="bg-black/30 px-8 m-auto w-full h-screen flex items-end justify-center pb-24 relative z-10">
         <div className="text-white text-center max-w-screen-xl">
-          <h1 className="text-4xl mb-4">Conforto, Qualidade, Funcionalidade e é claro, uma ESTÉTICA EXTREMAMENTE AVANÇADA!</h1>
-          <p>Compondo com um dos Tons mais Suaves e Discretos da Coleção NEW GEN, CRONUS tras uma Estética Obscura e Marcante em suas Cores e em seu Design Futurista e Esportivo, feita em armação Plasma relusente e Lente Preta, ideial pra quem gosta de um conceito mais Clean! Uma Lupa perfeita para quem Pratica Esporte, para usar no DIA A DIA e até mesmo naquele ROLÊ que vai marcar pra Sempre a sua Vida!</p>
+          <h2 className="text-4xl mb-4 drop-shadow-sm">Conforto, Qualidade, Funcionalidade e é claro, uma ESTÉTICA EXTREMAMENTE AVANÇADA!</h2>
+          <p className='drop-shadow-sm'>Compondo com um dos Tons mais Suaves e Discretos da Coleção NEW GEN, CRONUS tras uma Estética Obscura e Marcante em suas Cores e em seu Design Futurista e Esportivo, feita em armação Plasma relusente e Lente Preta, ideial pra quem gosta de um conceito mais Clean! Uma Lupa perfeita para quem Pratica Esporte, para usar no DIA A DIA e até mesmo naquele ROLÊ que vai marcar pra Sempre a sua Vida!</p>
         </div>
       </section>
 
