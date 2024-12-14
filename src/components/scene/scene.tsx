@@ -67,8 +67,8 @@ export const Scene: FC<SceneProps> = ({ activeSection }) => {
 
   return (
     <>
-      <ambientLight intensity={.2} />
-      {/* <pointLight position={[10, 10, 10]} /> */}
+      <ambientLight intensity={1} />
+      <pointLight position={[10, 10, 10]} />
       <SunglassesModel ref={meshRef} position={[0, 0, 4]} scale={4} />
       <OrbitControls enableZoom={false} />
     </>
