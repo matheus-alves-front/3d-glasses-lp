@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { AtmaNormalFont, RubikGlitchFont } from "@/fonts/fonts";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,8 +27,30 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${AtmaNormalFont.className} antialiased`}
       >
+        <header 
+          className="fixed top-0 left-0 right-0 p-8 flex items-center justify-center z-20"
+          style={{
+            background: "linear-gradient(to bottom, rgba(0,0,0) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.3) 90%, transparent 100%)"
+          }}
+        >
+          <nav className='hidden md:flex items-center justify-center gap-4 text-xl'>
+            <a href="#">Início</a>
+            <a href="#">Marcas</a>
+            <a href="#">Marcas</a>
+          </nav>
+          <h2 className={`${RubikGlitchFont.className} m-auto text-5xl`}>
+            <span className='text-yellow-600'>M</span>
+            ídia
+            <span className='text-yellow-600'>B</span>
+            oyz
+          </h2>
+          <nav className='hidden md:flex items-center justify-center gap-4 text-xl'>
+            <a href="#">Carrinho</a>
+            <a href="#">Contato</a>
+          </nav>
+        </header>
         {children}
       </body>
     </html>
