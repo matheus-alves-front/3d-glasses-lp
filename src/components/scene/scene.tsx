@@ -25,6 +25,7 @@ export const Scene: FC<SceneProps> = ({ activeSection }) => {
     loader.load('/models/envmap.hdr', (texture) => {
       const pmremGenerator = new PMREMGenerator(gl)
       pmremGenerator.compileEquirectangularShader()
+      gl.toneMapping = THREE.ACESFilmicToneMapping
 
       const envMap = pmremGenerator.fromEquirectangular(texture).texture
 
