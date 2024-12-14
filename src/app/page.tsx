@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useRef, FC } from 'react'
+import React, { useState, useEffect, useRef, FC, Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import { Scene } from '@/components/scene/scene'
@@ -52,7 +52,10 @@ const Home: FC = () => {
           gl={{ antialias: true }}
         >
           {/* Passe a seção ativa para a cena */}
-          <Scene activeSection={activeSection} />
+
+          <Suspense fallback={null}>
+            <Scene activeSection={activeSection} />
+          </Suspense>
         </Canvas>
       </section>
       <section ref={addToRefs} className="bg-black/30 px-8 m-auto w-full h-screen flex items-end justify-center pb-24 relative z-10">
