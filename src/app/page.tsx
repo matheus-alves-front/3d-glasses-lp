@@ -3,9 +3,11 @@
 import React, { useState, useEffect, useCallback, FC, Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
-import { Scene } from '@/components/scene/scene'
 import { AtmaBoldFont } from '@/fonts/fonts'
 import { FaWhatsapp } from "react-icons/fa";
+import dynamic from 'next/dynamic'
+
+const Scene = dynamic(() => import('../components/scene/Scene'), { ssr: false })
 
 export interface SectionElement extends HTMLElement {}
 

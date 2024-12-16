@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, FC, Suspense } from 'react'
+// Scene.tsx
+import React, { useEffect, useRef, FC, Suspense, useState } from 'react'
 import { useThree, useFrame } from '@react-three/fiber'
 import { OrbitControls, Html, useProgress, Environment, useTexture } from '@react-three/drei'
 import { SunglassesModel } from '../model/Sunglasses'
@@ -14,14 +15,12 @@ function Loader() {
   const { progress } = useProgress()
   return (
     <Html center style={{ color: '#fff', zIndex: 9999 }}>
-      <div className={`${Doctor_GlitchFont.className}`} style={{ background: 'rgba(0,0,0,0.5)', padding: '20px', borderRadius: '8px' }}>
+      <div className={Doctor_GlitchFont.className} style={{ background: 'rgba(0,0,0,0.5)', padding: '20px', borderRadius: '8px' }}>
         Carregando... {Math.floor(progress)}%
       </div>
     </Html>
   )
 }
-
-const isMobile = typeof window !== 'undefined' ? /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) : false
 
 const targetPositions: Record<number, { x: number; z: number; y: number; fov: number; isRotation: boolean }> = {
   1: { x: 0, z: 10, y: 0, fov: 90, isRotation: false },
@@ -30,20 +29,33 @@ const targetPositions: Record<number, { x: number; z: number; y: number; fov: nu
   4: { x: 0, z: 8, y: -6, fov: 90, isRotation: true },
 }
 
-export const Scene: FC<SceneProps> = ({ activeSection }) => {
-  const { camera } = useThree<{
+const Scene: FC<SceneProps> = ({ activeSection }) => {
+  const { camera, gl } = useThree<{
     camera: PerspectiveCamera;
+    gl: THREE.WebGLRenderer;
   }>()
 
   const angle = useRef<number>(0)
   const texture = useTexture('/models/envmap.png')
   texture.mapping = THREE.EquirectangularReflectionMapping
 
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && typeof navigator !== 'undefined') {
+      setIsMobile(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent))
+    }
+  }, [])
+
+  // Ajustar o FOV baseando-se se é mobile ou não
+  const baseFov = isMobile ? 70 : 90
+
   useFrame((_, delta) => {
     const { x, z, y, fov, isRotation } = targetPositions[activeSection] || targetPositions[1]
-    
+
     // Ajuste suave do FOV
-    camera.fov = MathUtils.lerp(camera.fov, fov, 0.025)
+    const targetFov = baseFov // se quiser variar o FOV por section, use fov da tabela acima
+    camera.fov = MathUtils.lerp(camera.fov, targetFov, 0.025)
     camera.updateProjectionMatrix()
 
     // Ponto central para a câmera olhar
@@ -76,17 +88,25 @@ export const Scene: FC<SceneProps> = ({ activeSection }) => {
     camera.lookAt(centerX, centerY, centerZ)
   })
 
+  // CSS inline para garantir touch-action: none;
+  useEffect(() => {
+    if (gl.domElement) {
+      gl.domElement.style.touchAction = 'none'
+    }
+  }, [gl.domElement])
+
   return (
     <Suspense fallback={<Loader />}>
-      <ambientLight intensity={0} /> */
+      <ambientLight intensity={0} />
       <pointLight position={[10, 10, 10]} />
-      
+
       <SunglassesModel position={[0, 0, 4]} scale={4} />
-      
-     
+
       <Environment map={texture} background />
-      
-      <OrbitControls enableZoom={false} />
+
+      {!isMobile && <OrbitControls enableZoom={false} />}
     </Suspense>
   )
 }
+
+export default Scene
