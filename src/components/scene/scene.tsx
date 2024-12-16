@@ -1,77 +1,97 @@
-import React, { useEffect, useRef, FC } from 'react'
+import React, { useEffect, useRef, FC, Suspense } from 'react'
 import { useThree, useFrame } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, Html, useProgress, Environment } from '@react-three/drei'
 import { SunglassesModel } from '../model/Sunglasses'
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
-import { PMREMGenerator, MathUtils, PerspectiveCamera } from 'three'
-import * as THREE from 'three'
+import { MathUtils, PerspectiveCamera } from 'three'
 
 interface SceneProps {
   activeSection: number;
 }
 
+function Loader() {
+  const { progress } = useProgress()
+  return (
+    <Html center style={{ color: '#fff', zIndex: 9999 }}>
+      <div style={{ background: 'rgba(0,0,0,0.7)', padding: '20px', borderRadius: '8px' }}>
+        Carregando... {Math.floor(progress)}%
+      </div>
+    </Html>
+  )
+}
+
+const isMobile = typeof window !== 'undefined' ? /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) : false
+
+// Ajustamos as posições conforme necessário:
+const targetPositions: Record<number, { x: number; z: number; y: number; fov: number; isRotation: boolean }> = {
+  1: { x: 0, z: 20, y: 1, fov: 80, isRotation: false },
+  2: { x: 5, z: 10, y: -4, fov: 60, isRotation: false },
+  3: { x: -8, z: 16, y: -2, fov: 90, isRotation: false },
+  4: { x: 0, z: 20, y: 0, fov: 90, isRotation: true },
+}
+
 export const Scene: FC<SceneProps> = ({ activeSection }) => {
-  const { scene, gl, camera } = useThree<{
-    scene: THREE.Scene;
-    gl: THREE.WebGLRenderer;
+  const { camera } = useThree<{
     camera: PerspectiveCamera;
   }>()
 
   const angle = useRef<number>(0)
-  const meshRef = useRef<THREE.Group>(null)
-
-  useEffect(() => {
-    const loader = new RGBELoader()
-    loader.load('/models/envmap.hdr', (texture) => {
-      const pmremGenerator = new PMREMGenerator(gl)
-      pmremGenerator.compileEquirectangularShader()
-      gl.toneMapping = THREE.ACESFilmicToneMapping
-
-      const envMap = pmremGenerator.fromEquirectangular(texture).texture
-
-      scene.environment = envMap
-      scene.background = envMap
-
-      texture.dispose()
-      pmremGenerator.dispose()
-    })
-  }, [scene, gl])
-
-  const targetPositions: Record<number, { radius: number; y: number; fov: number; isRotation: boolean }> = {
-    1: { radius: 20, y: 1, fov: 80, isRotation: false },
-    2: { radius: 16, y: -4, fov: 60, isRotation: true },
-    3: { radius: 14, y: -2, fov: 90, isRotation: true },
-  }
 
   useFrame((_, delta) => {
-    // Incrementa o "tempo" continuamente
-    angle.current += delta * 0.1
-  
-    // Obtém os parâmetros do targetPosition baseados no activeSection
-    const { radius, y, fov } = targetPositions[activeSection] || targetPositions[1]
-  
-    // Atualiza a câmera
-    camera.fov = MathUtils.lerp(camera.fov, fov, 0.05)
+    const { x, z, y, fov, isRotation } = targetPositions[activeSection] || targetPositions[1]
+    
+    // Ajuste suave do FOV
+    camera.fov = MathUtils.lerp(camera.fov, fov, 0.025)
     camera.updateProjectionMatrix()
-  
-    // Aqui você pode manter a translação se precisar
-    const targetX = Math.cos(angle.current) * radius
-    const targetZ = Math.sin(angle.current) * radius
-    camera.position.x = MathUtils.lerp(camera.position.x, targetX, 0.05)
-    camera.position.z = MathUtils.lerp(camera.position.z, targetZ, 0.05)
-    camera.position.y = MathUtils.lerp(camera.position.y, y, 0.05)
-  
-    camera.lookAt(0, 0, 0)
-  
+
+    // Ponto central do modelo (onde a câmera deve olhar)
+    const centerX = 0
+    const centerY = 0
+    const centerZ = 0
+
+    let targetX, targetY, targetZ
+
+    if (isRotation) {
+      // Orbitando ao redor do ponto central (o modelo em [0,0,4])
+      angle.current += delta * .4
+      const orbitRadius = 20 // Ajuste conforme necessário
+      const offsetX = Math.cos(angle.current) * orbitRadius
+      const offsetZ = Math.sin(angle.current) * orbitRadius
+
+      // A câmera orbita ao redor do modelo, independente de x,z da targetPosition.
+      // Caso queira usar x,z,y da targetPosition como "altura" ou "offset base", inclua-os no cálculo.
+      targetX = MathUtils.lerp(camera.position.x, centerX + offsetX, 0.025)
+      targetZ = MathUtils.lerp(camera.position.z, centerZ + offsetZ, 0.025)
+      targetY = MathUtils.lerp(camera.position.y, centerY + y, 0.025)
+
+    } else {
+      // Sem rotação: apenas aproximação suave da posição alvo
+      angle.current += delta * 0.5
+      const floatOffset = Math.sin(angle.current) * 1
+      targetX = MathUtils.lerp(camera.position.x, x, 0.025)
+      targetZ = MathUtils.lerp(camera.position.z, z, 0.025)
+      targetY = MathUtils.lerp(camera.position.y, y + floatOffset, 0.025)
+    }
+
+    camera.position.set(targetX, targetY, targetZ)
+    // Agora a câmera olha diretamente para o modelo
+    camera.lookAt(0,0,0)
   })
-  
 
   return (
-    <>
+    <Suspense fallback={<Loader />}>
       <ambientLight intensity={1} />
       <pointLight position={[10, 10, 10]} />
-      <SunglassesModel ref={meshRef} position={[0, 0, 4]} scale={4} />
+      
+      <SunglassesModel position={[0, 0, 4]} scale={4} />
+      
+      {/* {!isMobile && ( */}
+        <Environment files="/models/envmap.hdr" background />
+      {/* )} */}
+      {/* {isMobile && (
+        <color attach="background" args={[0xcccccc]} />
+      )} */}
+      
       <OrbitControls enableZoom={false} />
-    </>
+    </Suspense>
   )
 }

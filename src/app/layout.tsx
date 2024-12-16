@@ -1,18 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { AtmaNormalFont, RubikGlitchFont } from "@/fonts/fonts";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import { AtmaNormalFont, Doctor_GlitchFont } from "@/fonts/fonts";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -35,21 +24,21 @@ export default function RootLayout({
             background: "linear-gradient(to bottom, rgba(0,0,0) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.3) 90%, transparent 100%)"
           }}
         >
-          <nav className='hidden md:flex items-center justify-center gap-4 text-xl'>
+          {/* <nav className='hidden md:flex items-center justify-center gap-4 text-xl'>
             <a href="#">Início</a>
             <a href="#">Marcas</a>
             <a href="#">Marcas</a>
-          </nav>
-          <h2 className={`${RubikGlitchFont.className} m-auto text-5xl`}>
+          </nav> */}
+          <h2 className={`${Doctor_GlitchFont.className} m-auto text-5xl p-2 rounded-md `}>
             <span className='text-yellow-600'>M</span>
-            ídia
+            IDIA
             <span className='text-yellow-600'>B</span>
-            oyz
+            OYZ
           </h2>
-          <nav className='hidden md:flex items-center justify-center gap-4 text-xl'>
+          {/* <nav className='hidden md:flex items-center justify-center gap-4 text-xl'>
             <a href="#">Carrinho</a>
             <a href="#">Contato</a>
-          </nav>
+          </nav> */}
         </header>
         {children}
       </body>
