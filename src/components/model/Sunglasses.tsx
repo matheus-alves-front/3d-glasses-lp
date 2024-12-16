@@ -1,7 +1,8 @@
-import React, { FC, useRef } from 'react'
-import { useFrame, useThree } from '@react-three/fiber'
+import React, { FC} from 'react'
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
+
+useGLTF.preload('/models/sunglasses.glb')
 
 interface GLTFResult {
   nodes: {

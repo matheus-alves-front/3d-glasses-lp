@@ -97,7 +97,4 @@ const Home: FC = () => {
   )
 }
 
-// Pré-carrega o modelo
-useGLTF.preload('/models/sunglasses.glb')
-
 export default Home;
