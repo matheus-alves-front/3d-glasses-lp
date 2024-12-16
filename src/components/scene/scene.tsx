@@ -4,6 +4,7 @@ import { OrbitControls, Html, useProgress, Environment, useTexture } from '@reac
 import { SunglassesModel } from '../model/Sunglasses'
 import { MathUtils, PerspectiveCamera } from 'three'
 import * as THREE from 'three'
+import { Doctor_GlitchFont } from '@/fonts/fonts'
 
 interface SceneProps {
   activeSection: number;
@@ -13,7 +14,7 @@ function Loader() {
   const { progress } = useProgress()
   return (
     <Html center style={{ color: '#fff', zIndex: 9999 }}>
-      <div style={{ background: 'rgba(0,0,0,0.7)', padding: '20px', borderRadius: '8px' }}>
+      <div className={`${Doctor_GlitchFont.className}`} style={{ background: 'rgba(0,0,0,0.5)', padding: '20px', borderRadius: '8px' }}>
         Carregando... {Math.floor(progress)}%
       </div>
     </Html>
@@ -37,7 +38,6 @@ export const Scene: FC<SceneProps> = ({ activeSection }) => {
   const angle = useRef<number>(0)
   const texture = useTexture('/models/envmap.png')
   texture.mapping = THREE.EquirectangularReflectionMapping
-  texture.anisotropy = 300
 
   useFrame((_, delta) => {
     const { x, z, y, fov, isRotation } = targetPositions[activeSection] || targetPositions[1]

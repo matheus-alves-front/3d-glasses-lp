@@ -29,7 +29,7 @@ export default function RootLayout({
             <a href="#">Marcas</a>
             <a href="#">Marcas</a>
           </nav>
-          <h2 className={`${Doctor_GlitchFont.className} m-auto text-5xl p-2 rounded-md `}>
+          <h2 className={`${Doctor_GlitchFont.className} m-auto text-5xl text-white p-2 rounded-md `}>
             <span className='text-yellow-600'>M</span>
             IDIA
             <span className='text-yellow-600'>B</span>
