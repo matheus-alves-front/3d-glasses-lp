@@ -78,8 +78,8 @@ export const Scene: FC<SceneProps> = ({ activeSection }) => {
 
   return (
     <Suspense fallback={<Loader />}>
-      {/* <ambientLight intensity={0} /> */}
-      {/* <pointLight position={[10, 10, 10]} /> */}
+      <ambientLight intensity={0} /> */
+      <pointLight position={[10, 10, 10]} />
       
       <SunglassesModel position={[0, 0, 4]} scale={4} />
       
