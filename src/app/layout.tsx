@@ -24,21 +24,21 @@ export default function RootLayout({
             background: "linear-gradient(to bottom, rgba(0,0,0) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.3) 90%, transparent 100%)"
           }}
         >
-          {/* <nav className='hidden md:flex items-center justify-center gap-4 text-xl'>
+          <nav className='hidden md:flex items-center justify-center gap-4 text-xl'>
             <a href="#">Início</a>
             <a href="#">Marcas</a>
             <a href="#">Marcas</a>
-          </nav> */}
+          </nav>
           <h2 className={`${Doctor_GlitchFont.className} m-auto text-5xl p-2 rounded-md `}>
             <span className='text-yellow-600'>M</span>
             IDIA
             <span className='text-yellow-600'>B</span>
             OYZ
           </h2>
-          {/* <nav className='hidden md:flex items-center justify-center gap-4 text-xl'>
+          <nav className='hidden md:flex items-center justify-center gap-4 text-xl'>
             <a href="#">Carrinho</a>
             <a href="#">Contato</a>
-          </nav> */}
+          </nav>
         </header>
         {children}
       </body>

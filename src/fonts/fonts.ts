@@ -1,14 +1,14 @@
-import { Atma, Rubik_Glitch, Luckiest_Guy
+import { Tektur, Rubik_Glitch, Luckiest_Guy
 } from 'next/font/google'
 import localFont from 'next/font/local'
 
-export const AtmaBoldFont = Atma({
+export const AtmaBoldFont = Tektur({
   weight: '700',
   subsets: ['latin'],
   display: 'swap',
 })
 
-export const AtmaNormalFont = Atma({
+export const AtmaNormalFont = Tektur({
   weight: '400',
   subsets: ['latin'],
   display: 'swap',
