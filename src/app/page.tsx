@@ -60,29 +60,29 @@ const Home: FC = () => {
 
       {/* Cada seção do conteúdo com snap-start */}
       <section className="bg-black/10 px-8 m-auto w-full h-screen flex items-end justify-center pb-24 relative z-10 snap-start">
-        <div className="text-white text-center max-w-screen-xl">
-          <h2 className="text-4xl mb-4 drop-shadow-sm">Coleção Kira Returns</h2>
-          <p className='drop-shadow-sm'>Entre muitos de nossos Editoriais, conheça o NOVO MUNDO...</p>
+        <div className="text-white drop-shadow-xl text-center max-w-screen-xl">
+          <h2 style={{textShadow: '0px 0px 7px #000000'}} className="text-xl md:text-4xl mb-4 drop-shadow-lg">Coleção Kira Returns</h2>
+          <p className='drop-shadow-lg'>Entre muitos de nossos Editoriais, conheça o NOVO MUNDO...</p>
         </div>
       </section>
 
       <section className="bg-black/10 px-8 m-auto w-full h-screen flex items-end justify-center pb-24 relative z-10 snap-start">
-        <div className="text-white text-center max-w-screen-xl">
-          <h2 className="text-4xl mb-4 drop-shadow-sm">Lenda entre os maiores Rappers!</h2>
-          <p className='drop-shadow-sm'>Os Óculos mais LENDÁRIOS da Cena! ...</p>
+        <div className="text-white drop-shadow-xl text-center max-w-screen-xl">
+          <h2 style={{textShadow: '0px 0px 7px #000000'}} className="text-xl md:text-4xl mb-4 drop-shadow-lg">Lenda entre os maiores Rappers!</h2>
+          <p className='drop-shadow-lg'>Os Óculos mais LENDÁRIOS da Cena! ...</p>
         </div>
       </section>
 
       <section className="bg-black/10 px-8 m-auto w-full h-screen flex items-end justify-center pb-24 relative z-10 snap-start">
-        <div className="text-white text-center max-w-screen-xl">
-          <h2 className="text-4xl mb-4 drop-shadow-sm">Conforto, Qualidade, Funcionalidade...</h2>
-          <p className='drop-shadow-sm'>Compondo com um dos Tons mais Suaves ...</p>
+        <div className="text-white drop-shadow-xl text-center max-w-screen-xl">
+          <h2 style={{textShadow: '0px 0px 7px #000000'}} className="text-xl md:text-4xl mb-4 drop-shadow-lg">Conforto, Qualidade, Funcionalidade...</h2>
+          <p className='drop-shadow-lg'>Compondo com um dos Tons mais Suaves ...</p>
         </div>
       </section>
 
       <section className="bg-black/10 px-8 m-auto w-full h-screen flex items-end justify-center pb-24 relative z-10 snap-start">
-        <div className="text-white text-center max-w-screen-xl">
-          <h2 className="text-4xl mb-4 drop-shadow-sm">
+        <div className="text-white drop-shadow-xl text-center max-w-screen-xl">
+          <h2 style={{textShadow: '0px 0px 7px #000000'}} className="text-xl md:text-4xl mb-4 drop-shadow-lg">
             Não perca essa oportunidade de dar um upgrade no seu estilo!
           </h2>
           <button className='bg-white text-xl flex items-center justify-center gap-2 m-auto text-black px-8 py-4 mt-4 rounded-lg'>
