@@ -26,19 +26,11 @@ export default function RootLayout({
         >
           <nav className='hidden md:flex items-center justify-center gap-4 text-xl'>
             <a href="#">Início</a>
-            <a href="#">Marcas</a>
-            <a href="#">Marcas</a>
-          </nav>
-          <h2 className={`${Doctor_GlitchFont.className} m-auto text-5xl text-white p-2 rounded-md `}>
-            <span className='text-yellow-600'>M</span>
-            IDIA
-            <span className='text-yellow-600'>B</span>
-            OYZ
-          </h2>
-          <nav className='hidden md:flex items-center justify-center gap-4 text-xl'>
-            <a href="#">Carrinho</a>
+            <a href="#">Cores</a>
+            <a href="#">Sobre</a>
             <a href="#">Contato</a>
           </nav>
+
         </header>
         {children}
       </body>

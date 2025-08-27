@@ -1,3 +1,4 @@
+"use client"
 // Scene.tsx
 import React, { useEffect, useRef, FC, Suspense, useState } from 'react'
 import { useThree, useFrame } from '@react-three/fiber'
@@ -97,7 +98,6 @@ const Scene: FC<SceneProps> = ({ activeSection }) => {
 
   return (
     <Suspense fallback={<Loader />}>
-      <ambientLight intensity={0} />
       <pointLight position={[10, 10, 10]} />
 
       <SunglassesModel position={[0, 0, 4]} scale={4} />
