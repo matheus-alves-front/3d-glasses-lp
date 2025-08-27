@@ -3,11 +3,8 @@
 import React, { useState, useEffect, useCallback, FC, Suspense, useRef } from 'react'
 import { AtmaBoldFont } from '@/fonts/fonts'
 import { FaWhatsapp } from "react-icons/fa";
-import dynamic from 'next/dynamic'
 import { CanvaScene } from '@/components/scene/Canva'
 import { useInView } from 'framer-motion';
-
-const Scene = dynamic(() => import('../components/scene/Scene'), { ssr: false })
 
 export interface SectionElement extends HTMLElement {}
 
@@ -60,7 +57,6 @@ const Home: FC = () => {
   return (
     <main
       className={`
-        ${AtmaBoldFont.className} 
         relative 
         w-full
         h-dvh
